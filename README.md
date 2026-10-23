@@ -77,3 +77,7 @@ This is a **visual and usability pass**, not a complete rewrite of unfinished ga
 ### v0.6 interface changes
 - End Turn now appears beneath the Build section at the bottom of the right action panel.
 - Player trade dropdown and incoming trade offers display a colored circle matching the player's chosen color.
+
+### v0.8 updates
+- Ocean texture is static (no wave or ripple animation).
+- Number tokens allow clicks through to their underlying hex when selecting a robber destination.
