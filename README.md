@@ -59,3 +59,11 @@ This is a **visual and usability pass**, not a complete rewrite of unfinished ga
 ## v0.3 updates
 - Scoreboard initially appears in the upper-left corner of the board play area, clear of the game log; it remains draggable and hideable.
 - Starting roll-off: every player rolls two dice, highest total starts. If multiple players tie for the highest total, only those tied players roll again until one wins. Setup proceeds from that winner through join order (wrapping around), then reverses.
+
+
+## v0.4 UI updates
+- Last collection is shown at the top of the actions panel.
+- Private robbery notifications show the stolen resource only to the two involved players.
+- Active ports are listed for the current player.
+- Terrain labels removed, robber centered and highlighted, settlements triangular.
+- Remaining roads, settlements, cities displayed in board lower-right; development cards in board upper-right; recipes and build controls along board bottom.
