@@ -55,3 +55,7 @@ Alternatively, use **New > Web Service** with Runtime **Node**, Build Command `n
 - Improved contrast, spacing, cards, controls, and small-screen panel stacking.
 
 This is a **visual and usability pass**, not a complete rewrite of unfinished gameplay rules listed above.
+
+## v0.3 updates
+- Scoreboard initially appears in the upper-left corner of the board play area, clear of the game log; it remains draggable and hideable.
+- Starting roll-off: every player rolls two dice, highest total starts. If multiple players tie for the highest total, only those tied players roll again until one wins. Setup proceeds from that winner through join order (wrapping around), then reverses.
