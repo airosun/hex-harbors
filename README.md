@@ -81,3 +81,7 @@ This is a **visual and usability pass**, not a complete rewrite of unfinished ga
 ### v0.8 updates
 - Ocean texture is static (no wave or ripple animation).
 - Number tokens allow clicks through to their underlying hex when selecting a robber destination.
+
+### v0.9 — Cross-device icons
+- Pieces Available shows a player-colored triangle for settlements and a player-colored square for cities.
+- Resource illustrations use inline SVG instead of operating-system emoji fonts, including in resource inventories, trading, build recipes, and port labels. This prevents missing-glyph white boxes on devices without the required emoji fonts.
