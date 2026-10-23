@@ -85,3 +85,11 @@ This is a **visual and usability pass**, not a complete rewrite of unfinished ga
 ### v0.9 — Cross-device icons
 - Pieces Available shows a player-colored triangle for settlements and a player-colored square for cities.
 - Resource illustrations use inline SVG instead of operating-system emoji fonts, including in resource inventories, trading, build recipes, and port labels. This prevents missing-glyph white boxes on devices without the required emoji fonts.
+
+## v1.3 — Victory fanfare
+
+When a player wins, all connected players see a full-screen victory celebration with the winner name, victory points, gold trophy, and falling confetti. A synthesized victory fanfare plays where browser audio permissions allow. Players may replay the celebration or close it to view the final board. Reduced-motion settings disable confetti animations.
+
+
+## v1.4 — Final game statistics
+After a winner is declared, every player can open and close **Final Statistics** from the top ribbon, including after dismissing the victory overlay. The board records each normal gameplay dice total (2–12) and each resource produced by numbered terrain hexes, counting cities twice. Starting resources, trades, theft, and development cards do not contribute to board production totals. Statistics are shared from the server and remain accessible while the room is active.
