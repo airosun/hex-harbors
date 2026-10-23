@@ -16,13 +16,13 @@ Open http://localhost:3000 in your browser. To play with others, deploy as a Nod
 ## Important: prototype limitations / unfinished rules
 
 - The initial first-player roll-off is not yet implemented; initial order uses lobby join order.
-- Port spots are simplified vertex markers; coastal positioning and pairing need refinement.
+- Ports now render as coastal sailboats with visible 3:1 or resource-specific 2:1 icons; port placement remains a simplified single-vertex mechanic.
 - The 2:1 ports currently apply only to matching resources; 3:1 ports work. Supply has no finite bank.
 - Road Building allows two free roads, but no skip option when the player chooses to place fewer.
 - Victory Point cards are intended to be revealable on a winning turn; current UI exposes them before rolling and the server checks victory only during the action phase. This needs finishing.
 - Development cards have a simplified turn-purchase check and do not fully support the user's intended reveal and multi-card workflow.
 - Longest Route traversal and tie behavior need additional testing on complex intersections.
-- There is no celebratory fanfare/confetti yet, and no polished graphics, sound, or touch-first mobile interaction.
+- There is no celebratory fanfare/confetti yet, and no sound or fully optimized touch-first mobile interaction. Terrain textures, an activity banner, and responsive side panels are now included.
 - No persistent database, server restart recovery, spectator mode, host reassignment, or player leave control yet.
 - The game has not been comprehensively tested across browsers or simultaneous multiplayer edge cases.
 
@@ -45,3 +45,13 @@ Alternatively, use **New > Web Service** with Runtime **Node**, Build Command `n
 - Run only **one** instance. Multiple instances would have separate room state and matchmaking could fail.
 - Free Render instances may sleep after inactivity; the first visit after a sleep can take longer to load.
 - The existing gameplay limitations listed above still apply; deployment does not resolve them.
+
+## Visual polish update
+
+- Terrain now includes lightweight SVG patterns for forests, pastures, fields, hills, mountains, and deserts, requiring no external image hosting.
+- Coastal port icons are sailboats, with resource icons on 2:1 ports and an anchor for generic 3:1 ports.
+- The game log is in its own left-hand panel, while turn actions, building, and trading remain on the right.
+- A prominent temporary activity banner highlights the latest server game-log event.
+- Improved contrast, spacing, cards, controls, and small-screen panel stacking.
+
+This is a **visual and usability pass**, not a complete rewrite of unfinished gameplay rules listed above.
