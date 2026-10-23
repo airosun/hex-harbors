@@ -73,3 +73,7 @@ This is a **visual and usability pass**, not a complete rewrite of unfinished ga
 - Last Collection now uses a money sack icon.
 - Development card and remaining piece inventory panels can be dragged within the play area.
 - Turn phase, active player and last roll are larger and highlighted in the header.
+
+### v0.6 interface changes
+- End Turn now appears beneath the Build section at the bottom of the right action panel.
+- Player trade dropdown and incoming trade offers display a colored circle matching the player's chosen color.
