@@ -67,3 +67,9 @@ This is a **visual and usability pass**, not a complete rewrite of unfinished ga
 - Active ports are listed for the current player.
 - Terrain labels removed, robber centered and highlighted, settlements triangular.
 - Remaining roads, settlements, cities displayed in board lower-right; development cards in board upper-right; recipes and build controls along board bottom.
+
+## v0.5 interface changes
+- Build purchase buttons restored to a dedicated Build section in the right action panel; recipe reference remains along the board bottom.
+- Last Collection now uses a money sack icon.
+- Development card and remaining piece inventory panels can be dragged within the play area.
+- Turn phase, active player and last roll are larger and highlighted in the header.
