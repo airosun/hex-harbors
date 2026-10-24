@@ -118,3 +118,6 @@ Browser-based multiplayer, device rotation, and touch interactions should be ver
 - Your Turn sound/notice fires once per actual turn (or setup placement turn), not on phase changes.
 - A prominent shared banner appears when a 7 is rolled.
 - When the final roll-off participant rolls, all roll results remain visible for 2 seconds before setup or a tie-break round. The server controls this pause and prevents premature roll-off actions.
+
+### v2.0 — Robber target filtering
+When selecting a player to rob, only players with a settlement or city on a vertex of the robber's current hex **and at least one resource** appear. The server sends the eligible target IDs only to the robber's controller and independently validates every steal request. Players without resources are excluded because there is nothing to steal.

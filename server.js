@@ -16,7 +16,7 @@ function player(r,sid){return r.players.find(p=>p.sid===sid)}
 function current(r){return r.players[r.order[r.turn]]}
 function addLog(r,s){r.log.unshift(s);r.log=r.log.slice(0,80)}
 function fail(socket,s){socket.emit('errorMessage',s)}
-function broadcast(r){for(let p of r.players){let view={...r,players:r.players.map(x=>({...x,sid:undefined,token:undefined,resources:x.id===p.id?x.resources:undefined,cards:x.id===p.id?x.cards:undefined,resourceTotal:total(x),cardCount:x.cards.length})),deck:undefined,host:undefined,discard:Object.fromEntries(Object.entries(r.discard).map(([k,v])=>[k,v])),you:p.id,isHost:p.id===r.host,active:current(r)?.id,routeLengths:Object.fromEntries(r.players.map(x=>[x.id,r.board?pathLength(r,x):0]))};io.to(p.sid).emit('state',view)}}
+function broadcast(r){for(let p of r.players){let view={...r,players:r.players.map(x=>({...x,sid:undefined,token:undefined,resources:x.id===p.id?x.resources:undefined,cards:x.id===p.id?x.cards:undefined,resourceTotal:total(x),cardCount:x.cards.length})),deck:undefined,host:undefined,discard:Object.fromEntries(Object.entries(r.discard).map(([k,v])=>[k,v])),you:p.id,isHost:p.id===r.host,active:current(r)?.id,routeLengths:Object.fromEntries(r.players.map(x=>[x.id,r.board?pathLength(r,x):0])),robberTargets:p.id===r.robberActor&&r.phase==='robberTarget'?robberTargets(r):[]};io.to(p.sid).emit('state',view)}}
 function total(p){return Object.values(p.resources).reduce((a,b)=>a+b,0)}
 function count(p,t){return Object.values(p.buildings).filter(b=>b===t).length}
 function canVertex(r,p,v,initial=false){let node=r.board.vertices[v];if(!node||r.buildings[v])return false;if(node.neighbors.some(n=>r.buildings[n]))return false;return initial||node.neighbors.some(n=>r.roads[edgeKey(n,v)]===p.id)}
