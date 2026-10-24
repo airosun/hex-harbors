@@ -71,7 +71,40 @@ io.on('connection',socket=>{
  else if(type==='remove'&&r.phase==='lobby'&&r.host===p.id){let target=r.players.find(x=>x.id===data.id);if(target&&target!==p){io.to(target.sid).emit('kicked');r.players=r.players.filter(x=>x!==target);}}
  else if(type==='start'&&r.phase==='lobby'&&r.host===p.id&&r.players.length>=2){r.board=makeBoard();r.boardLocked=false;r.order=r.players.map((_,i)=>i);r.buildings={};r.roads={};r.deck=shuffle(deck);r.robber=r.board.tiles.findIndex(t=>t.type==='desert');r.phase='rolloff';r.rolloff={contenders:r.players.map(x=>x.id),rolls:{},round:1,winner:null};r.turn=0;addLog(r,'Starting roll-off! Each player rolls two dice; highest total goes first. Ties for highest roll again.')}
  else if(type==='shuffleBoard'&&r.phase==='rolloff'&&!r.boardLocked&&r.host===p.id){r.board=makeBoard();r.robber=r.board.tiles.findIndex(t=>t.type==='desert');addLog(r,`${p.name} reshuffled the board.`)}
- else if(type==='rolloffRoll'&&r.phase==='rolloff'&&r.rolloff?.contenders.includes(p.id)&&r.rolloff.rolls[p.id]===undefined){r.boardLocked=true;let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6),n=a+b;r.rolloff.rolls[p.id]={a,b,n};addLog(r,`${p.name} rolled ${a} + ${b} = ${n} in roll-off round ${r.rolloff.round}`);if(r.rolloff.contenders.every(pid=>r.rolloff.rolls[pid]!==undefined)){let high=Math.max(...r.rolloff.contenders.map(pid=>r.rolloff.rolls[pid].n)),tied=r.rolloff.contenders.filter(pid=>r.rolloff.rolls[pid].n===high);if(tied.length===1){let winner=r.players.find(x=>x.id===tied[0]);r.rolloff.winner=winner.id;let start=r.players.findIndex(x=>x.id===winner.id);r.order=r.players.map((_,i)=>(start+i)%r.players.length);r.phase='setup';r.turn=0;addLog(r,`${winner.name} wins the roll-off with ${high}! Initial placement begins in player join order starting with ${winner.name}, then reverses.`)}else{addLog(r,`Tie at ${high}! Only ${tied.map(pid=>r.players.find(x=>x.id===pid).name).join(' and ')} roll again.`);r.rolloff={contenders:tied,rolls:{},round:r.rolloff.round+1,winner:null,stats:{rolls:Object.fromEntries(Array.from({length:11},(_,i)=>[i+2,0])),resources:Object.fromEntries(resources.map(k=>[k,0]))}}}}}
+ else if(type==='rolloffRoll'&&r.phase==='rolloff'&&r.rolloff?.contenders.includes(p.id)&&r.rolloff.rolls[p.id]===undefined){
+  r.boardLocked=true;
+  const a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6),n=a+b;
+  r.rolloff.rolls[p.id]={a,b,n};
+  addLog(r,`${p.name} rolled ${a} + ${b} = ${n} in roll-off round ${r.rolloff.round}`);
+  if(r.rolloff.contenders.every(pid=>r.rolloff.rolls[pid]!==undefined)){
+   // Publish the complete final roll list to everyone before moving on.
+   const high=Math.max(...r.rolloff.contenders.map(pid=>r.rolloff.rolls[pid].n));
+   const tied=r.rolloff.contenders.filter(pid=>r.rolloff.rolls[pid].n===high);
+   r.phase='rolloffResults';
+   r.rolloff.tied=tied;
+   r.rolloff.high=high;
+   r.rolloff.revealUntil=Date.now()+2000;
+   const roomCode=r.code,round=r.rolloff.round;
+   setTimeout(()=>{
+    const room=rooms.get(roomCode);
+    if(!room||room.phase!=='rolloffResults'||room.rolloff?.round!==round)return;
+    if(tied.length===1){
+     const winner=room.players.find(x=>x.id===tied[0]);
+     room.rolloff.winner=winner.id;
+     const first=room.players.findIndex(x=>x.id===winner.id);
+     room.order=room.players.map((_,i)=>(first+i)%room.players.length);
+     room.phase='setup';room.turn=0;
+     addLog(room,`${winner.name} wins the roll-off with ${high}! Initial placement begins.`);
+    }else{
+     addLog(room,`Tie at ${high}! Only ${tied.map(pid=>room.players.find(x=>x.id===pid).name).join(' and ')} roll again.`);
+     room.rolloff={contenders:tied,rolls:{},round:round+1,winner:null};
+     room.phase='rolloff';
+    }
+    broadcast(room);
+   },2000);
+  }
+ }
+
  else if(type==='placeVertex'&&r.phase==='setup'&&requireActive()&&r.setupStage==='settlement'){if(!canVertex(r,p,data.id,true))return fail(socket,'Invalid settlement location');r.buildings[data.id]={owner:p.id,type:'settlement'};p.buildings[data.id]='settlement';r.pendingVertex=data.id;r.setupStage='road';if(r.setupStep>=r.players.length){for(let i of r.board.vertices[data.id].tiles){let t=r.board.tiles[i],res={hill:'brick',forest:'wood',pasture:'wool',field:'wheat',mountain:'ore'}[t.type];if(res)p.resources[res]++}}}
  else if(type==='placeEdge'&&r.phase==='setup'&&requireActive()&&r.setupStage==='road'){if(!canEdge(r,p,data.id,true))return fail(socket,'Road must touch your new settlement');r.roads[data.id]=p.id;nextSetup(r)}
  else if(type==='roll'&&r.phase==='preroll'&&requireActive()){let a=1+Math.floor(Math.random()*6),b=1+Math.floor(Math.random()*6),n=a+b;r.roll={a,b,n};r.stats.rolls[n]++;addLog(r,`${p.name} rolled ${a} + ${b} = ${n}`);if(n===7){r.discard={};for(let x of r.players)if(total(x)>7)r.discard[x.id]=Math.floor(total(x)/2);r.phase=Object.keys(r.discard).length?'discard':'robberMove';r.robberActor=p.id;r.robberNext='action'}else{produce(r,n);r.phase='action';win(r)}}

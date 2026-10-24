@@ -112,3 +112,9 @@ At game start, the 34 development cards are shuffled into a queue. Purchases dra
 - Socket.IO reconnection with retry/backoff and automatic rejoin using the same local player token. Active sessions remain in server memory and will still be lost on server restart or instance sleep. For reliable long-lived games, persistent room storage is recommended.
 
 Browser-based multiplayer, device rotation, and touch interactions should be verified on physical devices before treating this as production-ready.
+
+## v1.9 — Roll-off and notification refinements
+- Smaller board zoom controls.
+- Your Turn sound/notice fires once per actual turn (or setup placement turn), not on phase changes.
+- A prominent shared banner appears when a 7 is rolled.
+- When the final roll-off participant rolls, all roll results remain visible for 2 seconds before setup or a tie-break round. The server controls this pause and prevents premature roll-off actions.
