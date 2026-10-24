@@ -93,3 +93,22 @@ When a player wins, all connected players see a full-screen victory celebration 
 
 ## v1.4 — Final game statistics
 After a winner is declared, every player can open and close **Final Statistics** from the top ribbon, including after dismissing the victory overlay. The board records each normal gameplay dice total (2–12) and each resource produced by numbered terrain hexes, counting cities twice. Starting resources, trades, theft, and development cards do not contribute to board production totals. Statistics are shared from the server and remain accessible while the room is active.
+
+### Longest Route continuity (v1.6)
+Any settlement or city at a vertex interrupts road continuity, **including your own**. A road may terminate at such a vertex, but a continuous route cannot pass through it. The server recalculates longest routes and title ownership after building changes.
+
+## Development card draw queue (v1.7)
+
+At game start, the 34 development cards are shuffled into a queue. Purchases draw from the front. Cards remain out of circulation while held by a player; after a card is played, it is appended to the **back** of the queue. Victory Point cards are returned to the back when revealed to win. Cards are not reshuffled on return. This ensures every card already waiting in the queue is drawn before a returned card can be drawn again. If all cards are held, purchases are unavailable until a card is used.
+
+## v1.8 — Mobile, board controls and placement confirmation
+
+- Responsive layouts for phones and tablets, including portrait and landscape; action panel and game log stack below the board on narrow screens.
+- Five floating panels (scoreboard, Largest Army, Longest Route, development cards and remaining pieces) can be dragged beyond the board and individually shown/hidden from the header. Their positions are local to the browser session.
+- Board camera controls: **+**, **−**, and **●** (reset zoom and pan). Drag or touch-drag the board to pan. On desktop, Ctrl/Shift + mouse wheel also zooms.
+- **Apply / Cancel** confirmation appears after selecting a road edge or settlement/city vertex, including initial placement and free roads. Cancel leaves placement pending.
+- Turn banner and two-tone sound cue when a player's turn becomes active (subject to mobile browser audio autoplay rules).
+- The room creator can **Shuffle Board** repeatedly after starting, until the first roll-off roll. The server locks reshuffling at that point; shuffle changes tiles, numbers, ports, and resets the robber to a desert.
+- Socket.IO reconnection with retry/backoff and automatic rejoin using the same local player token. Active sessions remain in server memory and will still be lost on server restart or instance sleep. For reliable long-lived games, persistent room storage is recommended.
+
+Browser-based multiplayer, device rotation, and touch interactions should be verified on physical devices before treating this as production-ready.
