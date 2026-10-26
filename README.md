@@ -127,3 +127,6 @@ When selecting a player to rob, only players with a settlement or city on a vert
 - Trade selectors and trade offers use inline SVG resource icons.
 - Monopoly and Invention have icon-based resource pickers with Select, Confirm and Cancel.
 - Monopoly victims receive private resource-loss notifications; Invention generates a public announcement.
+
+### v2.3 Game Log enhancements
+Player names in the Game Log appear in bold using their selected player color. Use the **Filter by player** selector above the log to show events mentioning one player, or choose **All players** to restore the full log. Filters apply only to log entries and do not affect gameplay.
