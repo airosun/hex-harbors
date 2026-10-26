@@ -121,3 +121,9 @@ Browser-based multiplayer, device rotation, and touch interactions should be ver
 
 ### v2.0 — Robber target filtering
 When selecting a player to rob, only players with a settlement or city on a vertex of the robber's current hex **and at least one resource** appear. The server sends the eligible target IDs only to the robber's controller and independently validates every steal request. Players without resources are excluded because there is nothing to steal.
+
+## v2.2 changes
+- Board dragging begins only from water, not terrain or placement targets.
+- Trade selectors and trade offers use inline SVG resource icons.
+- Monopoly and Invention have icon-based resource pickers with Select, Confirm and Cancel.
+- Monopoly victims receive private resource-loss notifications; Invention generates a public announcement.
