@@ -130,3 +130,13 @@ When selecting a player to rob, only players with a settlement or city on a vert
 
 ### v2.3 Game Log enhancements
 Player names in the Game Log appear in bold using their selected player color. Use the **Filter by player** selector above the log to show events mentioning one player, or choose **All players** to restore the full log. Filters apply only to log entries and do not affect gameplay.
+
+## v2.5 — Road placement from buildings
+
+During regular turns and Road Building development-card placement, an unoccupied edge may be used if it touches any settlement or city owned by the active player, even when no road is already attached. Existing road extension rules still apply, and opponents’ buildings cannot be used as connection points. Initial setup roads still attach to the just-placed settlement.
+
+
+## v2.6 — Declare Victory and action colors
+- A player with 10+ visible VP can explicitly Declare Victory on their turn, before or after rolling. No automatic victory.
+- Victory Point development cards can be revealed immediately on the turn purchased (or on a later turn), including during the action phase, when revealing enough cards reaches at least 10 VP. Multiple VP cards are revealed together only as needed to reach 10.
+- Victory is declared by the active player using the gold button. End Turn and Cancel buttons are red; Confirm buttons are green.
