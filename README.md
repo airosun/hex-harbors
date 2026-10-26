@@ -140,3 +140,9 @@ During regular turns and Road Building development-card placement, an unoccupied
 - A player with 10+ visible VP can explicitly Declare Victory on their turn, before or after rolling. No automatic victory.
 - Victory Point development cards can be revealed immediately on the turn purchased (or on a later turn), including during the action phase, when revealing enough cards reaches at least 10 VP. Multiple VP cards are revealed together only as needed to reach 10.
 - Victory is declared by the active player using the gold button. End Turn and Cancel buttons are red; Confirm buttons are green.
+
+### v2.7 — Declare Victory button placement
+- The golden Declare Victory button is displayed immediately below the Build section and immediately above End Turn on the action panel. It remains available before rolling when eligible.
+
+### v2.8 — Declare Victory visibility
+The Declare Victory button is rendered only for the active player on their own turn, with at least 10 VP. The server independently validates victory declarations.
