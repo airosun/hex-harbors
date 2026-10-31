@@ -146,3 +146,16 @@ During regular turns and Road Building development-card placement, an unoccupied
 
 ### v2.8 — Declare Victory visibility
 The Declare Victory button is rendered only for the active player on their own turn, with at least 10 VP. The server independently validates victory declarations.
+
+## v3.0 — Visual & animation polish
+Client-only update (`public/index.html`); `server.js` and all game rules are unchanged.
+
+- **Board:** sandy island with surf, raised 3D hex tiles with bevel lighting, illustrated terrain (trees, peaks, wheat, sheep, clay, dunes), 3D number chips, a sculpted robber pawn and redesigned harbor boats/piers. Tiles deal in when a board appears; hexes that produce flash on each roll.
+- **3D pieces:** settlements are little houses, cities are towered buildings and roads are raised bars, all in player colour with shading and shadows. New pieces drop in with a bounce; the robber hops to its new hex.
+- **Placement:** legal spots glow while you place a settlement, city or road, a ghost preview of the piece is shown on the board while the Apply/Cancel sheet is open, and Apply/Cancel no longer covers the board.
+- **Popups:** one consistent family of toasts, banners and dialogs with smooth enter/exit transitions. Server errors now appear as a toast instead of a browser alert. Esc closes dialogs.
+- **Game log:** each entry has a category icon and tint (roll, build, trade, robber, card, award, victory), a stripe in the acting player's colour, and a dice-total badge for rolls. Coloured player names and the player filter are kept.
+- **Action panel:** turn card with player avatar, phase and animated dice; icon resource pickers with your counts; Supply/Players trade tabs that show your current trade rate; steppers for amounts and discards (with a live counter); 2×2 Build grid with piece icons and costs, which also replaces the old recipe bar on the board. Form values now survive state updates.
+- **Floating panels:** tap a header to collapse it into a compact chip, drag to move. The **Panels** menu shows/hides each one and can expand/collapse all or reset positions. On phones the panels start collapsed.
+- **Layouts:** reworked desktop, tablet, phone-portrait and phone-landscape layouts; a resource dock showing your hand size (flagged above 7) with +/− change animations; smooth zoom buttons and two-finger pinch zoom on touch screens.
+- Respects reduced-motion settings. Fonts load from Google Fonts with a system-font fallback.
